@@ -107,8 +107,6 @@ class App{
                 <ul class="g1"></ul>
                 <ul class="g2"></ul>
             </div>
-            <button class="sponsor" onclick="window.open('https://afdian.net/@LifeRestart')" style="background: linear-gradient(90deg,#946ce6,#7e5fd9); left:auto; right:50%; transform: translate(-2rem,-50%);">打赏策划(爱发电)</button>
-            <button class="sponsor" onclick="window.open('https://dun.mianbaoduo.com/@vickscarlet')" style="background-color:#c69; left:50%; right:auto; transform: translate(2rem,-50%);">打赏程序(顿顿饭)</button>
         </div>
         `);
 
@@ -119,10 +117,10 @@ class App{
         // Talent
         const talentPage = $(`
         <div id="main">
-            <div class="head" style="font-size: 1.6rem">天赋抽卡</div>
-            <button id="random" class="mainbtn" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"">10连抽！</button>
+            <div class="head" style="font-size: 1.6rem">Choose your Talents</div>
+            <button id="random" class="mainbtn" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"">10 of them</button>
             <ul id="talents" class="selectlist"></ul>
-            <button id="next" class="mainbtn">请选择3个</button>
+            <button id="next" class="mainbtn">请选择5个</button>
         </div>
         `);
 
@@ -143,12 +141,12 @@ class App{
                             if(li.hasClass('selected')) {
                                 li.removeClass('selected')
                                 this.#talentSelected.delete(talent);
-                                if(this.#talentSelected.size<3) {
-                                    talentPage.find('#next').text('请选择3个')
+                                if(this.#talentSelected.size<5) {
+                                    talentPage.find('#next').text('请选择5个')
                                 }
                             } else {
-                                if(this.#talentSelected.size==3) {
-                                    this.hint('只能选3个天赋');
+                                if(this.#talentSelected.size==5) {
+                                    this.hint('只能选5个天赋');
                                     return;
                                 }
 
@@ -168,7 +166,7 @@ class App{
                                 li.addClass('selected');
                                 this.#talentSelected.add(talent);
                                 if(this.#talentSelected.size==3) {
-                                    talentPage.find('#next').text('开始新人生')
+                                    talentPage.find('#next').text('Start')
                                 }
                             }
                         });
@@ -179,8 +177,8 @@ class App{
         talentPage
             .find('#next')
             .click(()=>{
-                if(this.#talentSelected.size!=3) {
-                    this.hint('请选择3个天赋');
+                if(this.#talentSelected.size!=5) {
+                    this.hint('请选择5个天赋');
                     return;
                 }
                 talentPage.find('#next').hide()
@@ -193,14 +191,14 @@ class App{
         const propertyPage = $(/*html*/`
         <div id="main">
             <div class="head" style="font-size: 1.6rem">
-                <div>调整初始属性</div>
+                <div>Adjust</div>
                 <div id="total" style="font-size:1rem; font-weight:normal;">可用属性点：0</div>
             </div>
             <ul id="propertyAllocation" class="propinitial"></ul>
             <ul class="selectlist" id="talentSelectedView"></ul>
             <div class="btn-area">
-                <button id="random" class="mainbtn">随机分配</button>
-                <button id="start" class="mainbtn">开始新人生</button>
+                <button id="random" class="mainbtn">随机</button>
+                <button id="start" class="mainbtn">Start</button>
             </div>
         </div>
         `);
